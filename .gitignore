@@ -1,4 +1,5 @@
 /vendor
+*.sqlite
 
 ### Laravel ###
 /bootstrap/compiled.php
