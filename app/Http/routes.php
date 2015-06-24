@@ -26,3 +26,5 @@ Route::controllers([
 ]);
 
 Route::resource('students', 'StudentsController', ['except' => 'destroy']);
+
+Route::post('classroom/store', 'ClassroomController@store');
