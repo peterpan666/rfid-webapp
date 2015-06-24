@@ -11,11 +11,18 @@
 |
 */
 
-Route::get('/', 'WelcomeController@index');
+Route::get('/', function () {
+    return Redirect::route('students.index');
+});
 
-Route::get('home', 'HomeController@index');
+Route::get('home', function () {
+    return Redirect::to('/');
+});
+
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+
+Route::resource('students', 'StudentsController', ['except' => 'destroy']);
