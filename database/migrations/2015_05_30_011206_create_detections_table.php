@@ -15,7 +15,7 @@ class CreateDetectionsTable extends Migration {
 		Schema::create('detections', function(Blueprint $table)
 		{
 			$table->increments('id');
-            $table->integer('tag_id')->unsigned();
+            $table->string('tag_id', 12);
             $table->string('room');
             $table->dateTime('created_at');
 		});
