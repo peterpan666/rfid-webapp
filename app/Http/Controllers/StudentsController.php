@@ -35,8 +35,10 @@ class StudentsController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index(Request $request)
 	{
+        $date = $request->has('date') ? Carbon::createFromFormat('d-m-Y', $request->get('date')) : Carbon::now();
+
         $promotions = $this->student
             ->distinct()
             ->orderBy('promotion', 'DESC')
@@ -45,8 +47,11 @@ class StudentsController extends Controller {
         $activePromotion = $this->input->get('promotion', $promotions->first()->promotion);
 
         $students = $this->student
-            ->with(['detections' => function($query) {
-                $query->whereBetween('created_at', [Carbon::today(), Carbon::tomorrow()])->orderBy('created_at', 'desc');
+            ->with(['detections' => function($query) use ($date) {
+                $start = $date->startOfDay()->toDateTimeString();
+                $stop = $date->endOfDay()->toDateTimeString();
+
+                $query->whereBetween('created_at', [$start, $stop])->orderBy('created_at', 'desc');
             }])->where('promotion', '=', $activePromotion)
             ->orderBy('name')
             ->get();
@@ -54,6 +59,7 @@ class StudentsController extends Controller {
 		return view('students.index')
             ->with('students', $students)
             ->with('activePromotion', $activePromotion)
+            ->with('date', $date->format('d-m-Y'))
             ->with('promotions', $promotions->toArray());
 	}
 
