@@ -18,7 +18,7 @@ class CreateStudentsTable extends Migration {
             $table->string('name');
             $table->string('email');
             $table->integer('promotion');
-            $table->integer('tag_id')->unsigned();
+            $table->string('tag_id', 12);
 			$table->timestamps();
 
             $table->unique(['email', 'promotion']);
