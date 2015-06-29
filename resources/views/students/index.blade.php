@@ -12,7 +12,7 @@
         $(document).ready(function () {
             $(function () {
                 var date = moment('{{$date}}', 'DD-MM-YYYY');
-                
+
                 $('#datetimepicker').datetimepicker({
                     locale: 'fr',
                     format: 'DD-MM-YYYY',
