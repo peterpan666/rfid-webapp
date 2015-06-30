@@ -65,7 +65,9 @@
                                 <td>
                                     <a href="{{route('students.edit', ['id' => $student->id])}}">{{$student->name}}</a>
                                 </td>
-                                <td>{{$student->email}}</td>
+                                <td>
+                                    <a href="mailto:{{$student->email}}?Subject=Abscence%20du%20{{$date}}" target="_top">{{$student->email}}</a>
+                                </td>
                                 <td>{{$student->tag_id}}</td>
                                 <td>
                                     @if (count($student->detections))
