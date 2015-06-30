@@ -33,7 +33,7 @@
                 <form class="form-inline pull-right" method="GET" action="{{route('students.index')}}">
                     <label>
                         Promotion:
-                        <select name="promotion">
+                        <select class="form-control" name="promotion">
                             @foreach($promotions as $promotion)
                             <option {{$activePromotion == $promotion['promotion'] ? 'selected' : ''}}>{{$promotion['promotion']}}</option>
                             @endforeach
@@ -52,9 +52,9 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            {{--<th>#</th>--}}
                             <th>Nom</th>
                             <th>Adresse email</th>
+                            <th>Tag</th>
                             <th>Premier passage détecté</th>
                             <th>Dernier passage détecté</th>
                         </tr>
@@ -62,9 +62,11 @@
                     <tbody>
                         @foreach ($students as $student)
                             <tr>
-                                {{--<td>{{$student->id}}</td>--}}
-                                <td>{{$student->name}}</td>
+                                <td>
+                                    <a href="{{route('students.edit', ['id' => $student->id])}}">{{$student->name}}</a>
+                                </td>
                                 <td>{{$student->email}}</td>
+                                <td>{{$student->tag_id}}</td>
                                 <td>
                                     @if (count($student->detections))
                                         {{$student->detections->last()->created_at}}

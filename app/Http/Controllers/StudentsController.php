@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Http\Requests\UpdateStudentRequest;
 use App\Student;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -102,18 +103,37 @@ class StudentsController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+		$student = $this->student->find($id);
+
+        if (!$student) {
+            return redirect('/');
+        }
+
+        return view('students.edit')
+            ->with('student', $student);
 	}
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  int $id
+     * @param UpdateStudentRequest $request
+     * @return Response
+     */
+	public function update($id, UpdateStudentRequest $request)
 	{
-		//
+        $student = $this->student->find($id);
+
+        if (!$student) {
+            return back()->withInput();
+        }
+
+        $student->email = $request->email;
+        $student->tag_id = $request->tag_id;
+        $student->save();
+
+        return redirect()->route('students.index')
+            ->with('success', "L'étudiant {$student->name} a bien été modifié.");
 	}
 
 	/**
