@@ -13,7 +13,7 @@ class ClassroomController extends Controller {
     {
         \Debugbar::disable();
 
-        foreach ($request->tag_id as $tag_id) {
+        foreach (array_unique($request->tag_id) as $tag_id) {
             $detection = new Detection;
             $detection->tag_id = $tag_id;
             $detection->room = $request->room;
