@@ -71,14 +71,14 @@
                                 <td>{{$student->tag_id}}</td>
                                 <td>
                                     @if (count($student->detections))
-                                        Date: {{$student->detections->last()->created_at}}
+                                        {{$student->detections->last()->created_at->toTimeString()}}
                                         <br>
                                         Salle: {{$student->detections->last()->room}}
                                     @endif
                                 </td>
                                 <td>
                                     @if (count($student->detections))
-                                        Date: {{$student->detections->first()->created_at}}
+                                        {{$student->detections->first()->created_at->toTimeString()}}
                                         <br>
                                         Salle: {{$student->detections->first()->room}}
                                     @endif
