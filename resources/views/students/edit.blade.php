@@ -23,7 +23,7 @@
                         <input type="text" name="tag_id" class="form-control" placeholder="Numéro de tag" value="{{old('tag_id')?old('tag_id'):$student->tag_id}}">
                     </div>
                     <button type="submit" class="btn btn-default">Mettre à jour</button>
-                    <a href="{{route('students.index')}}" class="btn btn-danger">Annulé</a>
+                    <a href="{{route('students.index', ["promotion" => $student->promotion])}}" class="btn btn-danger">Annulé</a>
                 </form>
             </div>
         </div>

@@ -132,7 +132,7 @@ class StudentsController extends Controller {
         $student->tag_id = $request->tag_id;
         $student->save();
 
-        return redirect()->route('students.index')
+        return redirect()->route('students.index', ['promotion' => $student->promotion])
             ->with('success', "L'étudiant {$student->name} a bien été modifié.");
 	}
 
